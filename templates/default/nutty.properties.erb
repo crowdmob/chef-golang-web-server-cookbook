@@ -1,0 +1,15 @@
+[default]
+appname=<%= @application_name %>
+port=<%= @env_vars['PORT'] %>
+env=<%= @service_realm %>
+
+[aws]
+region=<%= @env_vars['AWS_REGION'] %>
+accesskey=<%= @env_vars['AWS_ACCESS_KEY_ID'] %>
+secretkey=<%= @env_vars['AWS_SECRET_ACCESS_KEY'] %>
+
+[kafka]
+host=127.0.0.1
+port=9092
+partition=<%= @kafka_partition %>
+

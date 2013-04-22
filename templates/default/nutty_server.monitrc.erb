@@ -1,0 +1,7 @@
+check host nutty_<%= @application_name %>_server with address 127.0.0.1
+  start program = "<%= @release_path %>/nutty-<%= @application_name %>-server-daemon start"
+  stop program  = "<%= @release_path %>/nutty-<%= @application_name %>-server-daemon stop"
+  if failed port <%= @port %> protocol HTTP
+    request /
+    with timeout 10 seconds
+    then restart

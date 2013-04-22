@@ -1,0 +1,18 @@
+#!/bin/sh
+
+case $1 in
+  start)
+     echo $$ > <%= @pid_file %>;
+     <%= @release_path %>/nutty_<%= @application_name %>_server -c <%= @config_file %> 1><%= @output_file %>
+     ;;
+   stop)  
+     /usr/bin/pkill -2 -F <%= @pid_file %> 
+     ;;
+   restart)
+     stop ; echo "Sleeping..."; sleep 1 ;
+     start
+     ;;
+   *)  
+     echo "usage: nutty-<%= @application_name %>-server-daemon {start|stop|restart}" ;;
+esac
+exit 0
