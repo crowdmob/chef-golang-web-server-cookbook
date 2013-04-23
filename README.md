@@ -88,6 +88,7 @@ For the purposes of this cookbook, though, the only thing that it assumes about 
 License and Author
 ===============================
 Author:: Matthew Moore
+
 Copyright:: 2013, CrowdMob Inc.
 
 

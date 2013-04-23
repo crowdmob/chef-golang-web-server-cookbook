@@ -2,7 +2,15 @@ include_attribute "nutty::configure"
 
 node[:deploy].each do |application, _|
   default[:nutty][application][:service_realm] = node[:service_realm]
-  default[:nutty][application][:env] = {"HOME" => node[:deploy][application][:environment]["HOME"]}.merge(node[:deploy][application][:env])
+  
+  if node[:deploy][application][:environment]["HOME"] && node[:deploy][application][:env]
+    default[:nutty][application][:env] = {"HOME" => node[:deploy][application][:environment]["HOME"]}.merge(node[:deploy][application][:env])
+  elsif node[:deploy][application][:environment]["HOME"]
+    default[:nutty][application][:env] = {"HOME" => node[:deploy][application][:environment]["HOME"]}
+  elsif node[:deploy][application][:env]
+    default[:nutty][application][:env] = node[:deploy][application][:env]
+  end
+  
   default[:nutty][application][:restart_server_command] = "monit restart nutty_#{application}_server"
   default[:nutty][application][:stop_server_command] = "monit stop nutty_#{application}_server"
   
