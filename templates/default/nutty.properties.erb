@@ -1,6 +1,6 @@
 [default]
 appname=<%= @application_name %>
-<%= @env_vars.each do |k,v| %>
+<% @env_vars.each do |k,v| %>
 	<% if !['AWS_REGION','AWS_ACCESS_KEY_ID','AWS_SECRET_ACCESS_KEY'].include?(k) %>
 <%= k %>=<%= v %>
 <% end %>
