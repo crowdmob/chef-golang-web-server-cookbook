@@ -2,11 +2,17 @@
 
 case $1 in
   start)
-     echo $$ > <%= @pid_file %>;
-     <%= @release_path %>/nutty_<%= @application_name %>_server -c <%= @config_file %> 1><%= @output_file %>
+     if [ -e <%= @pid_file %> ]
+     then
+       echo "Server already running";
+     else
+       echo $$ > <%= @pid_file %>;
+       <%= @release_path %>/nutty_<%= @application_name %>_server -c <%= @config_file %> 1><%= @output_file %>;
+     fi
      ;;
    stop)  
-     /usr/bin/pkill -2 -F <%= @pid_file %> 
+     /usr/bin/pkill -2 -P `cat <%= @pid_file %>`;
+     rm <%= @pid_file %>
      ;;
    restart)
      stop ; echo "Sleeping..."; sleep 1 ;
