@@ -1,6 +1,10 @@
 [default]
 appname=<%= @application_name %>
-port=<%= @env_vars['PORT'] %>
+<% @env_vars.to_hash.each do |k,v| %>
+	<% if !['AWS_REGION','AWS_ACCESS_KEY_ID','AWS_SECRET_ACCESS_KEY'].include?(k) %>
+<%= k %>=<%= v %>
+<% end %>
+<% end %>
 env=<%= @service_realm %>
 
 [aws]
@@ -12,4 +16,3 @@ secretkey=<%= @env_vars['AWS_SECRET_ACCESS_KEY'] %>
 host=127.0.0.1
 port=9092
 partition=<%= @kafka_partition %>
-
