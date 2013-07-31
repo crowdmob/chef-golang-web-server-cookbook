@@ -8,6 +8,7 @@ case $1 in
      else
        echo $$ > <%= @pid_file %>;
        <%= @release_path %>/nutty_<%= @application_name %>_server -c <%= @config_file %> 1><%= @output_file %>;
+       rm <%= pid_file %>;
      fi
      ;;
    stop)  
