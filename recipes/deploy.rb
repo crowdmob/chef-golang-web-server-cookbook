@@ -22,6 +22,7 @@ node[:deploy].each do |application, _|
   nutty_deploy_config_and_monit do
     application_name            application
     hostname                    node[:hostname]
+    basicauth_users             node[:nutty][application][:basicauth_users]
     nutty_application_settings  node[:nutty][application]
     deploy_to                   node[:deploy][application][:deploy_to]
     env_vars                    node[:nutty][application][:env]
