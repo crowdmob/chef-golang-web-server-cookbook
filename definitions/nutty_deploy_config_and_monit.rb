@@ -19,6 +19,7 @@ define :nutty_deploy_config_and_monit do
     group    params[:group]
     variables(
       :application_name => params[:application_name],
+      :deploy_path      => params[:deploy_to],
       :env_vars         => params[:env_vars],
       :service_realm    => params[:service_realm],
       :kafka_partition  => (params[:hostname].match(/(\d+)(?!.*\d)/).nil? ? 0 : params[:hostname].match(/(\d+)(?!.*\d)/)[0].to_i - 1)
